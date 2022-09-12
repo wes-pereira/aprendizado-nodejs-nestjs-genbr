@@ -6,23 +6,27 @@ import { Tarefa } from "../entities/tarefa.entity";
 
 @Injectable()
 export class TarefaService{
-    /*  findByNome(nome: string): Promise<Tarefa[]> {
-        throw new Error("Method not implemented.");
-    }
-    */
+   
     constructor(
         @InjectRepository(Tarefa)
         private tarefaRepository: Repository<Tarefa>
     ){}
 
     async findAll(): Promise<Tarefa[]>{
-        return this.tarefaRepository.find()
+        return this.tarefaRepository.find({
+            relations:{
+                categoria: true
+            }
+        })
     }
 
     async findById(id: number): Promise<Tarefa> {
         let tarefa = await this.tarefaRepository.findOne({
             where:{
                 id
+            },
+            relations: {
+                categoria: true
             }
         })
 
@@ -37,6 +41,9 @@ export class TarefaService{
             where: {
                 nome: ILike(`%${nome}%`)
                 
+            },
+            relations: {
+                categoria: true
             }
         })
     }

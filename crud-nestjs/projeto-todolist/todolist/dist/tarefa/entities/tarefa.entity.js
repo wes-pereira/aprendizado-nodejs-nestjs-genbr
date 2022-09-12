@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tarefa = void 0;
 const class_validator_1 = require("class-validator");
+const categoria_entity_1 = require("../../categoria/entities/categoria.entity");
 const typeorm_1 = require("typeorm");
 let Tarefa = class Tarefa {
 };
@@ -44,6 +45,12 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Boolean)
 ], Tarefa.prototype, "status", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => categoria_entity_1.Categoria, (categoria) => categoria.tarefas, {
+        onDelete: "CASCADE"
+    }),
+    __metadata("design:type", categoria_entity_1.Categoria)
+], Tarefa.prototype, "categoria", void 0);
 Tarefa = __decorate([
     (0, typeorm_1.Entity)({ name: 'tb_tarefa' })
 ], Tarefa);

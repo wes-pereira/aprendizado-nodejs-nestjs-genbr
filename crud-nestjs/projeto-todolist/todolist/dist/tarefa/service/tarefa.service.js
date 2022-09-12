@@ -22,12 +22,19 @@ let TarefaService = class TarefaService {
         this.tarefaRepository = tarefaRepository;
     }
     async findAll() {
-        return this.tarefaRepository.find();
+        return this.tarefaRepository.find({
+            relations: {
+                categoria: true
+            }
+        });
     }
     async findById(id) {
         let tarefa = await this.tarefaRepository.findOne({
             where: {
                 id
+            },
+            relations: {
+                categoria: true
             }
         });
         if (!tarefa)
@@ -38,6 +45,9 @@ let TarefaService = class TarefaService {
         return this.tarefaRepository.find({
             where: {
                 nome: (0, typeorm_2.ILike)(`%${nome}%`)
+            },
+            relations: {
+                categoria: true
             }
         });
     }

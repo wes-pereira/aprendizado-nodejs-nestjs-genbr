@@ -1,3 +1,4 @@
+import { Categoria } from "src/categoria/entities/categoria.entity";
 export declare class Tarefa {
     id: number;
     nome: string;
@@ -5,4 +6,5 @@ export declare class Tarefa {
     responsavel: string;
     data: Date;
     status: Boolean;
+    categoria: Categoria;
 }
